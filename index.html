@@ -72,24 +72,24 @@
             z-index: 10;
             pointer-events: auto;
         }
-        /* 文字区域控制 - 完美对齐与精致行距 */
+        /* 文字区域控制 - 完美对齐与大字体行距 */
         .text-section {
             max-width: 650px;
             margin: 0 auto;
             text-align: center;
         }
         .date-tag {
-            font-size: 0.95rem;
+            font-size: 1.1rem; /* 放大日期标签 */
             color: #d96a6a;
             font-weight: bold;
             letter-spacing: 2px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: block;
         }
         h2 {
-            font-size: 1.65rem;
+            font-size: 1.9rem; /* 大幅放大每一幕主标题 */
             color: #333;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             font-weight: 600;
             position: relative;
             display: inline-block;
@@ -105,11 +105,11 @@
             background: linear-gradient(90deg, transparent, #d96a6a, transparent);
         }
         p {
-            font-size: 1.05rem;
-            line-height: 1.8;
+            font-size: 1.2rem; /* 大幅放大正文字体，更清晰好读 */
+            line-height: 1.9; /* 配合大字体提高行高，增强呼吸感 */
             color: #5c5c5c;
             text-align: center; 
-            margin-top: 10px;
+            margin-top: 12px;
             letter-spacing: 0.5px;
         }
         
@@ -246,33 +246,4 @@
             left: 35%;
             width: 30%;
             height: 16px;
-            background-color: rgba(217, 106, 106, 0.15);
-        }
-        .p-sleep {
-            flex: 1 1 44%;
-            max-width: 200px;
-            transform: rotate(4deg);
-        }
-        .polaroid-large:hover {
-            transform: scale(1.08) rotate(0deg);
-            z-index: 99;
-        }
-
-        /* 第一幕：微信气泡样式 */
-        .chat-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 380px;
-            margin: auto;
-            width: 100%;
-            padding: 10px 0;
-        }
-        .chat-bubble {
-            padding: 12px 18px;
-            border-radius: 16px;
-            font-size: 1rem;
-            max-width: 80%;
-            position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            letter-spacing: 0.5px
+            background-color: rgba(217, 106, 106, 0.
