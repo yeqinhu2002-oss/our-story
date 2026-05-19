@@ -56,7 +56,7 @@
             position: absolute;
             width: 100%;
             height: 95vh;
-            padding: 30px 25px;
+            padding: 35px 25px;
             opacity: 0;
             transform: scale(0.95) translateY(20px);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -72,7 +72,7 @@
             z-index: 10;
             pointer-events: auto;
         }
-        /* 文字区域控制 */
+        /* 文字区域控制 - 完美对齐与精致行距 */
         .text-section {
             max-width: 650px;
             margin: 0 auto;
@@ -84,19 +84,21 @@
             font-weight: bold;
             letter-spacing: 2px;
             margin-bottom: 8px;
+            display: block;
         }
         h2 {
-            font-size: 1.7rem;
+            font-size: 1.65rem;
             color: #333;
             margin-bottom: 12px;
             font-weight: 600;
             position: relative;
             display: inline-block;
+            letter-spacing: 1px;
         }
         h2::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -6px;
             left: 20%;
             width: 60%;
             height: 2px;
@@ -104,11 +106,11 @@
         }
         p {
             font-size: 1.05rem;
-            line-height: 1.7;
+            line-height: 1.8;
             color: #5c5c5c;
-            text-align: justify;
-            text-indent: 2em;
+            text-align: center; 
             margin-top: 10px;
+            letter-spacing: 0.5px;
         }
         
         /* 乱中有序自适应相片墙：支持横竖不同的原始图片尺寸 */
@@ -123,7 +125,7 @@
             margin: auto;
             padding: 15px 0;
             overflow-y: auto;
-            max-height: 52vh; /* 防止手机端图片过长溢出 */
+            max-height: 52vh;
         }
         
         /* 拍立得相框基础样式 */
@@ -134,7 +136,6 @@
             border-radius: 4px;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            /* 弹性宽度：如果是横图就自动伸展，是竖图就保持比例 */
             flex: 1 1 40%;
             max-width: 220px; 
             position: relative;
@@ -143,11 +144,11 @@
             align-items: center;
         }
         
-        /* 核心改动：保持图片本身的原始比例与真实尺寸 */
+        /* 保持图片本身的原始比例与真实尺寸 */
         .polaroid img {
             max-width: 100%;
             height: auto;
-            max-height: 160px; /* 限制最大高度防止过长，横竖图自适应拉伸 */
+            max-height: 160px; 
             border-radius: 2px;
             background: #f7f7f7;
             display: block;
@@ -212,7 +213,7 @@
             max-width: 600px;
             margin: auto;
         }
-        #scene-5 .polaroid-large {
+        .polaroid-large {
             background: #fff;
             padding: 12px 12px 25px 12px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.06);
@@ -223,14 +224,14 @@
             position: relative;
             transition: all 0.4s ease;
         }
-        #scene-5 .polaroid-large img {
+        .polaroid-large img {
             max-width: 100%;
             height: auto;
             max-height: 200px;
             display: block;
         }
-        #scene-5 .polaroid-large::after {
-            content: "合照";
+        .polaroid-large::after {
+            content: "合照 📸";
             display: block;
             text-align: center;
             font-size: 0.85rem;
@@ -238,7 +239,7 @@
             margin-top: 10px;
             font-family: "STKaiti", "楷体", serif;
         }
-        #scene-5 .polaroid-large::before {
+        .polaroid-large::before {
             content: '';
             position: absolute;
             top: -10px;
@@ -247,12 +248,12 @@
             height: 16px;
             background-color: rgba(217, 106, 106, 0.15);
         }
-        #scene-5 .p-sleep {
+        .p-sleep {
             flex: 1 1 44%;
             max-width: 200px;
             transform: rotate(4deg);
         }
-        #scene-5 .polaroid-large:hover {
+        .polaroid-large:hover {
             transform: scale(1.08) rotate(0deg);
             z-index: 99;
         }
@@ -265,6 +266,7 @@
             max-width: 380px;
             margin: auto;
             width: 100%;
+            padding: 10px 0;
         }
         .chat-bubble {
             padding: 12px 18px;
@@ -273,206 +275,4 @@
             max-width: 80%;
             position: relative;
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-        }
-        .chat-left {
-            background-color: #fff;
-            align-self: flex-start;
-            border-top-left-radius: 2px;
-            color: #333;
-        }
-        .chat-right {
-            background-color: #95ec69;
-            align-self: flex-end;
-            border-top-right-radius: 2px;
-            color: #000;
-        }
-
-        /* 下一幕控制按钮 */
-        .action-space {
-            text-align: center;
-            padding-bottom: 5px;
-        }
-        .btn-next {
-            background: linear-gradient(135deg, #e07a7a 0%, #d96a6a 100%);
-            color: white;
-            border: none;
-            padding: 12px 40px;
-            border-radius: 30px;
-            font-size: 1rem;
-            cursor: pointer;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(217, 106, 106, 0.3);
-            display: inline-block;
-        }
-        .btn-next:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(217, 106, 106, 0.5);
-        }
-
-        /* 结尾幕 */
-        #scene-6 .text-section {
-            margin: auto 0;
-        }
-        #scene-6 p {
-            text-align: center;
-            text-indent: 0;
-            font-size: 1.15rem;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-
-    <!-- 开始幕 -->
-    <div class="curtain active" id="scene-0">
-        <div class="text-section" style="margin-top: 15vh;">
-            <h2>序章：时间的足迹</h2>
-            <p>亲爱的小刘同志：<br><br>真没想到，一晃眼我们竟然已经认识三个月了。时间过得挺快，今天借着这个日子，想和你一起按下时光的回放键，看看这90天里，我们共同走过的轨迹。</p>
-        </div>
-        <div class="action-space">
-            <button class="btn-next" onclick="nextScene(1)">开启电影回放</button>
-        </div>
-    </div>
-
-    <!-- 第一幕 -->
-    <div class="curtain" id="scene-1">
-        <div class="text-section">
-            <div class="date-tag">2026.02.14</div>
-            <h2>第一幕：一切的开始</h2>
-            <p>2月14日，我们加上了微信。当时只有试探性的文字和有些生疏的问候，但那个小小的绿色聊天框，却悄悄连起我们后来的所有故事。</p>
-        </div>
-        
-        <div class="chat-container">
-            <div class="chat-bubble chat-left">你好博士姐 👋</div>
-            <div class="chat-bubble chat-right">我好像比你小 🌹</div>
-            <div class="chat-bubble chat-left" style="align-self: center; background: none; box-shadow: none; color: #b5a4a4; font-size: 0.85rem;">一开始觉得你好冒昧哈哈哈...</div>
-        </div>
-
-        <div class="action-space">
-            <button class="btn-next" onclick="nextScene(2)">点击翻开下一页</button>
-        </div>
-    </div>
-
-    <!-- 第二幕 -->
-    <div class="curtain" id="scene-2">
-        <div class="text-section">
-            <div class="date-tag">2026.02.19</div>
-            <h2>第二幕：扬州仪征 · 初次碰面</h2>
-            <p>加上微信没几天，去扬州见你了。有些局促的初见，围着热气腾腾的火锅聊天，还有KTV里的歌声和清晨的小笼包。仪征很好，更开心的是见到了你。。</p>
-        </div>
-        
-        <!-- 乱中有序：保持图片原始尺寸比例 -->
-        <div class="ordered-scat-wall">
-            <div class="polaroid p1" data-caption="清晨 · 火车站"><img src="扬州火车站.jpg" alt="火车站"></div>
-            <div class="polaroid p2" data-caption="热气腾腾的火锅"><img src="扬州火锅.jpg" alt="吃火锅"></div>
-            <div class="polaroid p3" data-caption="你唱歌真的很好听~"><img src="仪征KTV.jpg" alt="KTV"></div>
-            <div class="polaroid p4" data-caption="清晨的小笼包yyds"><img src="仪征小笼包.jpg" alt="小笼包"></div>
-        </div>
-
-        <div class="action-space">
-            <button class="btn-next" onclick="nextScene(3)">跨越距离 ✈️</button>
-        </div>
-    </div>
-
-    <!-- 第三幕 -->
-    <div class="curtain" id="scene-3">
-        <div class="text-section">
-            <div class="date-tag">2026.04.11</div>
-            <h2>第三幕：广州 · 跨越距离</h2>
-            <p>这一次，轮到你跨越一千多公里来广州找我。我们把时间都花在了探寻岭南美食上。快乐的时间总是不够用，最后分别的时候，心里满是不舍。</p>
-        </div>
-        
-        <!-- 五张照片自适应比例排版 -->
-        <div class="ordered-scat-wall">
-            <div class="polaroid p1" data-caption="一顿精致的早茶"><img src="广州早茶.jpg" alt="早茶"></div>
-            <div class="polaroid p2" data-caption="茶餐厅的烟火气"><img src="广州茶餐厅.jpg" alt="广式茶餐厅"></div>
-            <div class="polaroid p3" data-caption="充满仪式感的牛排"><img src="广州牛排.jpg" alt="牛排"></div>
-            <div class="polaroid p4" data-caption="暖胃的潮汕火锅"><img src="广州潮汕火锅.jpg" alt="潮汕牛肉火锅"></div>
-            <div class="polaroid p5" data-caption="你坐上出租车走的那天"><img src="你走的那天.jpg" alt="送别的一瞬间"></div>
-        </div>
-
-        <div class="action-space">
-            <button class="btn-next" onclick="nextScene(4)">下一站故事</button>
-        </div>
-    </div>
-
-    <!-- 第四幕 -->
-    <div class="curtain" id="scene-4">
-        <div class="text-section">
-            <div class="date-tag">2026.04.25</div>
-            <h2>第四幕：苏州 · 特别的重逢</h2>
-            <p>我去苏州参加会议，你特意开车赶来见我。精致的日料、地道的浇头面，还有烤盘上滋滋作响的烤肉，组成了我们在苏州的独家记忆。可我还是担心你开车会很累...</p>
-        </div>
-        
-        <!-- 三张照片自适应比例排版 -->
-        <div class="ordered-scat-wall">
-            <div class="polaroid p1" data-caption="精致的日料"><img src="苏州日料.jpg" alt="日料"></div>
-            <div class="polaroid p2" data-caption="地道浇头面"><img src="苏州浇头面.jpg" alt="浇头面"></div>
-            <div class="polaroid p3" data-caption="滋滋作响的烤肉"><img src="苏州烤肉.jpg" alt="烤肉"></div>
-        </div>
-
-        <div class="action-space">
-            <button class="btn-next" onclick="nextScene(5)">见证重要时刻</button>
-        </div>
-    </div>
-
-    <!-- 第五幕 -->
-    <div class="curtain" id="scene-5">
-        <div class="text-section">
-            <div class="date-tag">2026.05.01</div>
-            <h2>第五幕：特殊的长假</h2>
-            <p>五一长假，你和你的家人来到了我家。听着屋里的欢笑声，突然觉得好不真实。而在家里看着你毫无防备的安心睡脸，那一刻，突然对未来有了期待。</p>
-        </div>
-        
-        <!-- 双大图手账对页效果，图片保留本身尺寸比例 -->
-        <div class="double-wall">
-            <div class="polaroid-large">
-                <img src="世界上第二浪漫的事是散步，第一浪漫是和你.jpg" alt="五一合照">
-            </div>
-            <div class="polaroid p-sleep" data-caption="让人安心的睡脸 💤">
-                <img src="为什么可以睡得这么香？.jpg" alt="睡着的你">
-            </div>
-        </div>
-
-        <div class="action-space">
-            <button class="btn-next" onclick="nextScene(6)">读到最后 💌</button>
-        </div>
-    </div>
-
-    <!-- 结尾幕 -->
-    <div class="curtain" id="scene-6">
-        <div class="text-section">
-            <h2>尾声：故事未完待续</h2>
-            <p style="margin-top: 30px;">
-                坐下来整理这些碎片时，连我自己都惊讶，<br>
-                原来短短三个月我们已经一起跨越了这么多城市，一起吃过这么多顿饭。<br><br>
-                小刘同志很高兴认识你，希望我们互相珍惜。<br>
-                期待在未来的日子里，继续续写属于我们的故事。<br><br>
-                <span style="font-size: 1.4rem; color: #d96a6a; display: block; font-weight: bold; margin-top: 20px;">520快乐，小刘同志！🌹</span>
-            </p>
-        </div>
-        <div class="action-space" style="margin-bottom: 5vh;">
-            <span style="font-size: 0.85rem; color: #aaa;">✨ 我们的故事才刚刚开始 ✨</span>
-        </div>
-    </div>
-
-</div>
-
-<script>
-    function nextScene(sceneId) {
-        const currentActive = document.querySelector('.curtain.active');
-        if (currentActive) {
-            currentActive.classList.remove('active');
-        }
-        
-        const nextSceneElement = document.getElementById('scene-' + sceneId);
-        if (nextSceneElement) {
-            nextSceneElement.classList.add('active');
-        }
-    }
-</script>
-
-</body>
-</html>
+            letter-spacing: 0.5px
