@@ -369,9 +369,7 @@
 </head>
 <body>
 
-<!-- 背景音乐组件 -->
-<!-- 背景音乐组件：已替换为苏运莹的《想你和我们的以后》本地路径 -->
-<audio id="bg-music" src="想你和我们的以后.mp3" loop></audio>
+<audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
 
 <div class="container">
 
@@ -505,75 +503,20 @@
 </div>
 
 <script>
-    // 获取音乐播放器元素
     const music = document.getElementById('bg-music');
 
-    function nextScene(sceneId) {
-        // 核心改动：当用户点击第一个按钮（意味着第一次发生交互）时，开始播放音乐
+    // 强力唤醒播放器的核心函数
+    function forcePlayMusic() {
         if (music && music.paused) {
-            music.play().catch(err => {
-                console.log("浏览器拦截了自动播放，等待更明确的交互:", err);
+            music.play().then(() => {
+                console.log("音频上下文唤醒成功，开始播放苏运莹的歌！");
+                // 成功播放后移除全局监听，避免重复触发影响性能
+                document.removeEventListener('click', forcePlayMusic);
+                document.removeEventListener('touchstart', forcePlayMusic);
+            }).catch(err => {
+                console.log("强行播放尝试中:", err);
             });
         }
-
-        const currentActive = document.querySelector('.curtain.active');
-        if (currentActive) {
-            currentActive.classList.remove('active');
-        }
-        
-        const nextSceneElement = document.getElementById('scene-' + sceneId);
-        if (nextSceneElement) {
-            nextSceneElement.classList.add('active');
-        }
     }
 
-    // 微信内置浏览器的特殊兼容优化
-    // 微信在准备就绪时会抛出 WeixinJSBridgeReady 事件，允许在这时触发音频自动播放
-    document.addEventListener("WeixinJSBridgeReady", function () {
-        if (music && music.paused) {
-            music.play().catch(err => console.log("微信端策略限制:", err));
-        }
-    }, false);
-
-    /* 点击超大爱心炸裂满屏爱心雨的炫酷逻辑 */
-    function burstHearts(e) {
-        const amount = 35; 
-        const container = document.body;
-        
-        const rect = e.currentTarget.getBoundingClientRect();
-        const originX = rect.left + rect.width / 2;
-        const originY = rect.top + rect.height / 2;
-
-        const colors = ['#d96a6a', '#f5a4a4', '#e07a7a', '#ff4d4d', '#ff8585'];
-
-        for (let i = 0; i < amount; i++) {
-            const h = document.createElement('div');
-            h.classList.add('burst-heart');
-            h.innerText = '♥';
-            
-            h.style.color = colors[Math.floor(Math.random() * colors.length)];
-            h.style.setProperty('--size', (Math.random() * 20 + 15) + 'px');
-            
-            const angle = Math.random() * Math.PI * 2;
-            const distance = Math.random() * 220 + 80; 
-            
-            document.documentElement.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
-            h.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
-            h.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
-            h.style.setProperty('--rot', (Math.random() * 360) + 'deg');
-            h.style.setProperty('--duration', (Math.random() * 0.5 + 0.8) + 's');
-            
-            h.style.left = originX + 'px';
-            h.style.top = originY + 'px';
-            
-            container.appendChild(h);
-            
-            setTimeout(() => {
-                h.remove();
-            }, 1300);
-        }
-    }
-</script>
-
-</body>
-</html>
+    // 【多
