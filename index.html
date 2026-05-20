@@ -519,4 +519,71 @@
         }
     }
 
-    // 【多
+    // 【多重防线一】只要页面发生任何点击或触碰，立刻无感唤醒音频
+    document.addEventListener('click', forcePlayMusic, { once: false });
+    document.addEventListener('touchstart', forcePlayMusic, { once: false });
+
+    function nextScene(sceneId) {
+        // 【多重防线二】点击下一页按钮时进行二次唤醒保障
+        forcePlayMusic();
+
+        const currentActive = document.querySelector('.curtain.active');
+        if (currentActive) {
+            currentActive.classList.remove('active');
+        }
+        
+        const nextSceneElement = document.getElementById('scene-' + sceneId);
+        if (nextSceneElement) {
+            nextSceneElement.classList.add('active');
+        }
+    }
+
+    // 【多重防线三】微信内置浏览器内核就绪时自动尝试劫持播放
+    document.addEventListener("WeixinJSBridgeReady", function () {
+        if (music && music.paused) {
+            music.play().catch(err => console.log("微信端唤醒受限:", err));
+        }
+    }, false);
+
+    /* 点击超大爱心炸裂满屏爱心雨的炫酷逻辑 */
+    function burstHearts(e) {
+        const amount = 35; 
+        const container = document.body;
+        
+        const rect = e.currentTarget.getBoundingClientRect();
+        const originX = rect.left + rect.width / 2;
+        const originY = rect.top + rect.height / 2;
+
+        const colors = ['#d96a6a', '#f5a4a4', '#e07a7a', '#ff4d4d', '#ff8585'];
+
+        for (let i = 0; i < amount; i++) {
+            const h = document.createElement('div');
+            h.classList.add('burst-heart');
+            h.innerText = '♥';
+            
+            h.style.color = colors[Math.floor(Math.random() * colors.length)];
+            h.style.setProperty('--size', (Math.random() * 20 + 15) + 'px');
+            
+            const angle = Math.random() * Math.PI * 2;
+            const distance = Math.random() * 220 + 80; 
+            
+            document.documentElement.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+            h.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+            h.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+            h.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+            h.style.setProperty('--duration', (Math.random() * 0.5 + 0.8) + 's');
+            
+            h.style.left = originX + 'px';
+            h.style.top = originY + 'px';
+            
+            container.appendChild(h);
+            
+            setTimeout(() => {
+                h.remove();
+            }, 1300);
+        }
+    }
+</script>
+
+</body>
+</html>
